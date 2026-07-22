@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #080C14;
+  --color-panel: #0D1520;
+  --color-panel-deep: #05080F;
+  --color-panel-raised: #0F1E2E;
+
+  --color-amber: #FFB000;
+  --color-amber-glow: rgba(255, 176, 0, 0.35);
+  --color-amber-dim: rgba(255, 176, 0, 0.10);
+  --color-amber-ghost: rgba(255, 176, 0, 0.07);
+
+  --color-text-primary: #C8D8E8;
+  --color-text-secondary: #8AAABB;
+  --color-text-muted: #658296;
+  --color-text-ghost: rgba(255, 176, 0, 0.50);
+
+  --color-border-subtle: #0C1A26;
+  --color-border-mid: #152030;
+  --color-border-amber: rgba(255, 176, 0, 0.30);
+
+  --color-status-online: #2ECC71;
+  --color-status-warning: #F39C12;
+  --color-status-alert: #CC4444;
+  --color-status-info: #4488CC;
+
+  --font-display: 'Bebas Neue', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    margin: 0;
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-subtle) transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-subtle);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-mid);
+  }
+}
+
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+    overflow: visible !important;
+  }
+  
+  /* Reset backgrounds */
+  [class*="bg-\[var\(--color-canvas\)\]"],
+  [class*="bg-\[var\(--color-panel\)\]"],
+  [class*="bg-\[var\(--color-panel-deep\)\]"],
+  [class*="bg-\[var\(--color-panel-raised\)\]"],
+  [class*="bg-\[var\(--color-amber-dim\)\]"],
+  [class*="bg-\[var\(--color-amber-ghost\)\]"] {
+    background-color: transparent !important;
+  }
+  
+  /* Make all text black or dark gray */
+  [class*="text-\[var\(--color-text-primary\)\]"],
+  [class*="text-\[var\(--color-text-secondary\)\]"],
+  [class*="text-\[var\(--color-text-muted\)\]"],
+  [class*="text-\[var\(--color-text-ghost\)\]"],
+  [class*="text-\[var\(--color-amber\)\]"],
+  [class*="text-\[var\(--color-status-"] {
+    color: #111 !important;
+  }
+
+  /* Reset borders to thin gray */
+  [class*="border-\[var\(--color-border-subtle\)\]"],
+  [class*="border-\[var\(--color-border-mid\)\]"],
+  [class*="border-\[var\(--color-border-amber\)\]"],
+  [class*="border-\[var\(--color-amber\)\]"] {
+    border-color: #ddd !important;
+  }
+  
+  /* Disable 3D Transforms, Animations, Shadows */
+  * {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+  
+  /* Hide thematic UI Chrome */
+  .cursor-dot, .cursor-ring {
+    display: none !important;
+  }
+  
+  /* Force page breaks properly */
+  .print\:block > * {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+  
+  /* Reset height/overflow for everything */
+  .print\:overflow-visible * {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
