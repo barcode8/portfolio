@@ -79,7 +79,7 @@ function App() {
       </AnimatePresence>
 
       {/* MAIN APP SHELL */}
-      <div className="flex min-h-screen bg-[var(--color-canvas)] text-[var(--color-text-primary)] font-sans overflow-hidden flex-col selection:bg-[var(--color-amber-glow)] selection:text-[var(--color-amber)] print:bg-white print:text-black print:overflow-visible print:h-auto print:min-h-0">
+      <div className="min-h-screen md:h-screen overflow-y-auto md:overflow-hidden flex flex-col bg-[var(--color-canvas)] text-[var(--color-text-primary)] font-sans overflow-x-hidden selection:bg-[var(--color-amber-glow)] selection:text-[var(--color-amber)] print:bg-white print:text-black print:overflow-visible print:h-auto print:min-h-0">
       {isClient && <CustomCursor />}
       
       {/* ── TOP NAVIGATION BAR ────────────────────────────────────────── */}
@@ -102,13 +102,13 @@ function App() {
                 onClick={() => handleTabClick(tab.id)}
                 onMouseEnter={playHover}
                 className={`
-                  relative h-full px-5 flex items-center group transition-all duration-150
+                  relative h-full px-5 flex items-center group transition-all duration-150 min-w-[100px] sm:min-w-0 active:bg-[var(--color-amber-dim)]
                   ${isActive 
                     ? 'bg-[var(--color-amber-dim)] text-[var(--color-amber)] border-b-2 border-[var(--color-amber)] shadow-[inset_0_-2px_12px_rgba(255,176,0,0.15)]' 
                     : 'bg-[var(--color-panel)] text-[var(--color-text-primary)] opacity-60 hover:bg-[var(--color-amber-ghost)] hover:opacity-100'}
                 `}
               >
-                <span className="font-mono text-[0.60rem] opacity-60 mr-2">[{tab.code}]</span>
+                <span className="font-mono text-[0.65rem] opacity-60 mr-2">[{tab.code}]</span>
                 <span className="font-display text-lg font-medium tracking-normal mt-0.5">
                   <span className="hidden lg:inline">{tab.label}</span>
                   <span className="inline lg:hidden">{tab.shortLabel}</span>
@@ -132,7 +132,7 @@ function App() {
           <button
             onClick={handlePrint}
             onMouseEnter={playHover}
-            className="flex items-center px-2 py-1 font-mono text-[0.55rem] tracking-widest border border-[var(--color-border-subtle)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-mid)] transition-all duration-300"
+            className="flex items-center px-2 py-1 font-mono text-[0.65rem] tracking-widest border border-[var(--color-border-subtle)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-mid)] transition-all duration-300"
           >
             <Printer className="w-3 h-3 sm:mr-2" />
             <span className="hidden sm:inline">EXPORT PLAINTEXT</span>
@@ -143,7 +143,7 @@ function App() {
               toggleDecrypted();
             }}
             onMouseEnter={playHover}
-            className={`flex items-center px-2 py-1 font-mono text-[0.55rem] tracking-widest border transition-all duration-300 ${
+            className={`flex items-center px-2 py-1 font-mono text-[0.65rem] tracking-widest border transition-all duration-300 ${
               isDecrypted
                 ? 'border-[var(--color-status-online)] text-[var(--color-status-online)] shadow-[0_0_8px_rgba(46,204,113,0.3)] bg-[rgba(46,204,113,0.1)]'
                 : 'border-[var(--color-amber)] text-[var(--color-amber)] hover:bg-[var(--color-amber-ghost)]'
@@ -169,11 +169,11 @@ function App() {
       </header>
 
       {/* ── PAGE CONTENT AREA ─────────────────────────────────────────── */}
-      <main className="flex-1 relative overflow-hidden h-[calc(100vh-80px)] print:h-auto print:overflow-visible">
+      <main className="flex-none md:flex-1 relative overflow-visible md:overflow-hidden h-auto md:min-h-0 print:h-auto print:overflow-visible">
         <ClassificationStamp text="TOP SECRET" />
         
         {/* SCREEN RENDER */}
-        <div className="print:hidden h-full">
+        <div className="print:hidden h-auto md:h-full">
           <AnimatePresence mode="wait">
             {isClient && (
             <motion.div
@@ -182,7 +182,7 @@ function App() {
               animate={{ x: 0, opacity: 1, filter: 'blur(0px) contrast(100%) hue-rotate(0deg)' }}
               exit={{ x: -28, opacity: 0, filter: 'blur(4px) contrast(150%) hue-rotate(10deg)' }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="absolute inset-0 p-4 sm:p-6 overflow-y-auto overflow-x-hidden custom-scrollbar"
+              className="relative md:absolute md:inset-0 p-4 sm:p-6 pb-32 md:pb-6 overflow-visible md:overflow-y-auto overflow-x-hidden custom-scrollbar"
             >
               {activeTabId === 0 && <OperativeOverview />}
               {activeTabId === 1 && <TechnicalArmory />}

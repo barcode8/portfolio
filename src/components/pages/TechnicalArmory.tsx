@@ -67,9 +67,9 @@ const itemVariants = {
 
 export function TechnicalArmory() {
   return (
-    <div className="flex flex-col h-full space-y-6 relative z-10">
+    <div className="flex flex-col h-auto md:h-full space-y-6 relative z-10">
       {/* Header */}
-      <div className="flex justify-between text-[var(--color-text-secondary)] font-mono text-xs tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
+      <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0 text-[var(--color-text-secondary)] font-mono text-xs tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
         <span>LOADOUT REF: MI6/TECH/TA-02/2026</span>
         <span>MODULE COUNT: 04 ACTIVE</span>
       </div>
@@ -84,7 +84,7 @@ export function TechnicalArmory() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0 overflow-y-auto custom-scrollbar"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-none md:flex-1 h-auto md:min-h-0 overflow-visible md:overflow-y-auto custom-scrollbar pb-24 md:pb-4"
       >
         {MODULES.map((mod, idx) => (
           <motion.div key={idx} variants={itemVariants} className="relative bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6">
@@ -96,7 +96,7 @@ export function TechnicalArmory() {
                 {mod.title}
               </div>
               <div 
-                className="font-mono text-[0.60rem] tracking-[0.15em] px-2 py-0.5 border"
+                className="font-mono text-[0.65rem] tracking-[0.15em] px-2 py-0.5 border"
                 style={{ borderColor: mod.color, color: mod.color, backgroundColor: `${mod.color}10` }}
               >
                 {mod.clearance}

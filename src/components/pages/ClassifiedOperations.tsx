@@ -37,9 +37,9 @@ export function ClassifiedOperations() {
   };
 
   return (
-    <div className="flex flex-col h-full space-y-6 relative z-10">
+    <div className="flex flex-col h-auto md:h-full space-y-6 relative z-10">
       {/* Header */}
-      <div className="flex justify-between text-[var(--color-text-secondary)] font-mono text-[0.60rem] tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
+      <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0 text-[var(--color-text-secondary)] font-mono text-[0.65rem] tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
         <span>OPS FILE: MI6/OPS/CO-03/2026</span>
         <span className="text-[var(--color-amber)]">CLEARANCE: ULTRA</span>
       </div>
@@ -47,23 +47,23 @@ export function ClassifiedOperations() {
       <TerminalScramble 
         text="CLASSIFIED OPERATIONS"
         as="h2"
-        className="font-display text-4xl md:text-5xl tracking-normal text-[var(--color-text-primary)] mt-2"
+        className="font-display text-3xl sm:text-4xl md:text-5xl tracking-normal text-[var(--color-text-primary)] mt-2"
       />
 
-      <div className="flex flex-col lg:flex-row gap-6 flex-1 min-h-0 overflow-y-auto custom-scrollbar pb-4">
+      <div className="flex flex-col lg:flex-row gap-6 flex-none md:flex-1 h-auto md:min-h-0 overflow-visible md:overflow-y-auto custom-scrollbar pb-4">
         
         {/* FEATURED OPERATION: VIDSHARE PANEL */}
-        <div className="flex-1 flex flex-col xl:flex-row gap-6 min-w-0">
+        <div className="flex-none md:flex-1 flex flex-col xl:flex-row gap-6 min-w-0 pb-24 md:pb-4">
           
           <div 
-            className="flex-1 shrink-0"
+            className="flex-none md:flex-1 shrink-0 active:scale-[0.99] transition-transform duration-150"
             style={{ perspective: 1000 }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
             <motion.div 
               className="relative h-auto min-h-fit bg-[var(--color-panel-deep)] border border-[var(--color-amber)] p-8 pb-16"
-              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+              style={window.innerWidth > 768 ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
             >
               <BracketCorners size={12} thickness={2} color="var(--color-amber)" />
               
@@ -83,7 +83,7 @@ export function ClassifiedOperations() {
                   <div className="absolute inset-0 bg-gradient-to-br from-[#152030] to-transparent opacity-30 pointer-events-none" />
                   <TerminalScramble 
                     text="VIDSHARE"
-                    className="font-display text-5xl sm:text-7xl md:text-9xl tracking-tight text-[var(--color-text-primary)] shadow-[var(--color-amber-glow)] relative z-10"
+                    className="font-display text-4xl sm:text-6xl md:text-9xl tracking-tight text-[var(--color-text-primary)] shadow-[var(--color-amber-glow)] relative z-10"
                     style={{ textShadow: '0 0 40px rgba(255,176,0,0.12)' }}
                   />
                 </div>
@@ -187,7 +187,7 @@ export function ClassifiedOperations() {
                    <span className="animate-pulse ml-2 font-bold">_</span>
                  </div>
                  <div 
-                   className="font-display text-5xl xl:text-6xl tracking-tight text-[var(--color-text-primary)] shadow-[var(--color-amber-glow)]"
+                   className="font-display text-4xl sm:text-5xl xl:text-6xl tracking-tight text-[var(--color-text-primary)] shadow-[var(--color-amber-glow)]"
                    style={{ textShadow: '0 0 40px rgba(255,176,0,0.15)' }}
                  >
                    COMING SOON

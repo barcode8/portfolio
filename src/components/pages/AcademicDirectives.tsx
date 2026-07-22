@@ -35,10 +35,10 @@ const itemVariants = {
 export function AcademicDirectives() {
   const { isDecrypted } = useDossier();
   return (
-    <div className="flex flex-col h-full space-y-6 relative z-10">
+    <div className="flex flex-col h-auto md:h-full space-y-6 relative z-10">
       {/* Header */}
-      <div className="flex justify-between text-[var(--color-text-secondary)] font-mono text-xs tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
-        <span>ACADEMIC FILE: MI6/ACAD/AD-04/2026</span>
+      <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0 text-[var(--color-text-secondary)] font-mono text-xs tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
+        <span>EDU REF: MI6/ACAD/02-2026</span>
         <span>CREDENTIAL DOSSIER</span>
       </div>
 
@@ -48,7 +48,7 @@ export function AcademicDirectives() {
         className="font-display text-4xl md:text-5xl tracking-normal text-[var(--color-text-primary)] mt-2"
       />
 
-      <div className="flex flex-col lg:flex-row gap-6 flex-1 min-h-0 overflow-y-auto custom-scrollbar pb-4">
+      <div className="flex flex-col lg:flex-row gap-6 flex-none md:flex-1 h-auto md:min-h-0 overflow-visible md:overflow-y-auto custom-scrollbar pb-4">
         
         {/* PANEL A & TIMELINE */}
         <div className="w-full lg:w-[380px] shrink-0 flex flex-col gap-6">
@@ -142,7 +142,7 @@ export function AcademicDirectives() {
         </div>
 
         {/* PANEL B */}
-        <div className="flex-1 min-w-0 flex flex-col gap-6">
+        <div className="flex-none md:flex-1 min-w-0 flex flex-col gap-6 pb-24 md:pb-4">
           <div className="bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6 pb-2">
             
             <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] pb-2 mb-6">
@@ -170,7 +170,7 @@ export function AcademicDirectives() {
                         <div className="h-[12px] w-px bg-[var(--color-border-mid)] mr-3" />
                         <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{mod.name}</span>
                       </div>
-                      <span className="font-mono text-[0.60rem] tracking-[0.15em]" style={{ color: mod.statusColor }}>
+                      <span className="font-mono text-[0.65rem] tracking-[0.15em]" style={{ color: mod.statusColor }}>
                         {mod.status}
                       </span>
                     </div>
@@ -185,7 +185,7 @@ export function AcademicDirectives() {
 
           <div className="flex items-center text-[var(--color-text-muted)] font-mono text-xs tracking-widest">
             <RedactionBlock width="100%" className="mr-4 max-w-[200px]" />
-            <span className="truncate">ADDITIONAL RECORDS REDACTED PER PRIVACY DIRECTIVE 2026-08</span>
+            <span className="whitespace-normal md:truncate">ADDITIONAL RECORDS REDACTED PER PRIVACY DIRECTIVE 2026-08</span>
           </div>
         </div>
       </div>

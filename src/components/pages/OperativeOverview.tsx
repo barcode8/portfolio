@@ -44,25 +44,25 @@ export function OperativeOverview() {
       initial={{ scale: 0.98, opacity: 0, filter: 'blur(4px)' }}
       animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="flex flex-col h-full space-y-4 relative z-10"
+      className="flex flex-col h-auto md:h-full space-y-4 relative z-10"
     >
       {/* Header */}
-      <div className="flex justify-between text-[var(--color-text-secondary)] font-mono text-xs tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
+      <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-0 text-[var(--color-text-secondary)] font-mono text-xs tracking-widest border-b border-[var(--color-border-subtle)] pb-2 shrink-0">
         <span>FILE REF: MI6/PERS/OV-01/2026</span>
         <span className="text-[var(--color-status-alert)]">CLASSIFICATION: TOP SECRET</span>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 flex-1 min-h-0">
+      <div className="flex flex-col lg:flex-row gap-6 flex-none md:flex-1 h-auto md:min-h-0">
         {/* PANEL A: ID CARD */}
         <div 
-          className="relative w-full lg:w-[440px] shrink-0" 
+          className="relative w-full lg:w-[440px] shrink-0 active:scale-[0.99] transition-transform duration-150" 
           style={{ perspective: 1000 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
           <motion.div 
             className="w-full h-full bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6 flex flex-col relative"
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            style={window.innerWidth > 768 ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
           >
             <BracketCorners size={12} thickness={2} color="var(--color-amber)" />
             
@@ -100,7 +100,7 @@ export function OperativeOverview() {
                 <span className="font-mono text-xs tracking-[0.14em] text-[var(--color-text-muted)] uppercase mb-1">
                   OPERATIVE DESIGNATION
                 </span>
-                <div className="font-mono text-lg font-bold text-[var(--color-text-primary)] tracking-widest mb-3 flex items-center gap-2 h-6 truncate">
+                <div className="font-mono text-lg font-bold text-[var(--color-text-primary)] tracking-widest mb-3 flex items-center gap-2 h-auto md:h-6 whitespace-normal md:truncate">
                   {isDecrypted ? (
                     <span className="animate-pulse text-[var(--color-status-online)]">HAARDIK AGGARWAL</span>
                   ) : (
@@ -150,10 +150,10 @@ export function OperativeOverview() {
         </div>
 
         {/* PANELS B & C */}
-        <div className="flex-1 flex flex-col gap-6 min-w-0 overflow-y-auto custom-scrollbar">
+        <div className="flex-none md:flex-1 h-auto md:min-h-0 flex flex-col gap-6 min-w-0 overflow-visible md:overflow-y-auto custom-scrollbar">
           
           {/* PANEL B: INTELLIGENCE BRIEF */}
-          <div className="relative flex-1 bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6">
+          <div className="relative flex-none md:flex-1 bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6 active:scale-[0.99] transition-transform duration-150">
             <BracketCorners size={8} thickness={1.5} color="var(--color-border-subtle)" />
             
             <div className="flex items-center mb-6">
@@ -163,7 +163,7 @@ export function OperativeOverview() {
                 className="font-display text-[1.4rem] tracking-normal text-[var(--color-amber)] whitespace-nowrap mr-4 mt-1"
               />
               <div className="flex-1 h-px bg-[var(--color-border-subtle)] mr-4" />
-              <span className="font-mono text-[0.55rem] font-light text-[var(--color-text-secondary)] opacity-60 tracking-[0.2em] whitespace-nowrap">
+              <span className="font-mono text-[0.65rem] font-light text-[var(--color-text-secondary)] opacity-60 tracking-[0.2em] whitespace-nowrap">
                 EYES ONLY
               </span>
             </div>
@@ -189,7 +189,7 @@ export function OperativeOverview() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.04 }}
-                  className="border border-[var(--color-amber-glow)] bg-[var(--color-amber-dim)] font-mono text-[0.58rem] text-[var(--color-amber)] px-[0.55rem] py-[0.2rem] tracking-[0.1em]"
+                  className="border border-[var(--color-amber-glow)] bg-[var(--color-amber-dim)] font-mono text-[0.65rem] text-[var(--color-amber)] px-[0.55rem] py-[0.2rem] tracking-[0.1em]"
                 >
                   [{skill}]
                 </motion.div>
@@ -200,7 +200,7 @@ export function OperativeOverview() {
               <button 
                 onClick={() => { playDeploy(); setIsModalOpen(true); }}
                 onMouseEnter={playHover}
-                className="w-full sm:w-auto px-6 py-3 border border-[var(--color-amber)] text-[var(--color-amber)] text-lg tracking-[0.1em] transition-all duration-300 hover:bg-[var(--color-amber-ghost)] hover:shadow-[0_0_15px_rgba(255,176,0,0.4)]"
+                className="w-full sm:w-auto px-6 py-3 border border-[var(--color-amber)] text-[var(--color-amber)] text-lg tracking-[0.1em] transition-all duration-300 hover:bg-[var(--color-amber-ghost)] hover:shadow-[0_0_15px_rgba(255,176,0,0.4)] active:scale-[0.98] active:bg-[var(--color-amber-dim)]"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
                 [ ESTABLISH SECURE COMMS ]
@@ -209,7 +209,7 @@ export function OperativeOverview() {
           </div>
 
           {/* PANEL C: SECURITY AUTHORISATIONS */}
-          <div className="relative shrink-0 bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6 pt-8 flex flex-col justify-center">
+          <div className="relative shrink-0 bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6 pt-8 pb-24 md:pb-6 flex flex-col justify-center">
              <BracketCorners size={8} thickness={1.5} color="var(--color-border-subtle)" />
              <div className="absolute top-0 left-0 w-full flex justify-center -mt-[6px]">
                <span className="bg-[var(--color-canvas)] px-3 font-display text-base tracking-normal text-[var(--color-text-muted)] mt-1">
@@ -240,22 +240,22 @@ export function OperativeOverview() {
       </div>
 
       {/* PANEL D: DEPLOYMENT STATUS STRIP */}
-      <div className="w-full h-[52px] bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] flex items-center shrink-0">
-        <div className="flex-1 flex items-center h-full px-4 border-r border-[var(--color-border-subtle)] min-w-0">
+      <div className="w-full h-auto flex flex-col md:flex-row items-start md:items-center py-4 md:py-0 shrink-0 gap-4 md:gap-0 bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)]">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-r border-[var(--color-border-subtle)] min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">SPECIALISATION:</span>
-           <span className="font-mono text-xs text-[var(--color-text-primary)] truncate">Backend/DevOps Development</span>
+           <span className="font-mono text-xs text-[var(--color-text-primary)] whitespace-normal md:truncate">Backend/DevOps Development</span>
         </div>
-        <div className="flex-1 flex items-center h-full px-4 border-r border-[var(--color-border-subtle)] min-w-0">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-r border-[var(--color-border-subtle)] min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">PRIMARY STACK:</span>
-           <span className="font-mono text-xs text-[var(--color-text-primary)] truncate">React · Node.js · Express.js · MongoDB · Docker</span>
+           <span className="font-mono text-xs text-[var(--color-text-primary)] whitespace-normal md:truncate">React · Node.js · Express.js · MongoDB · Docker</span>
         </div>
-        <div className="flex-1 flex items-center h-full px-4 border-r border-[var(--color-border-subtle)] hidden xl:flex min-w-0">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-r border-[var(--color-border-subtle)] hidden xl:flex min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">ENVIRONMENT:</span>
-           <span className="font-mono text-xs text-[var(--color-text-primary)] truncate">Arch Linux / Hyprland WM</span>
+           <span className="font-mono text-xs text-[var(--color-text-primary)] whitespace-normal md:truncate">Arch Linux / Hyprland WM</span>
         </div>
-        <div className="flex-1 flex items-center h-full px-4 min-w-0">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">AVAILABILITY:</span>
-           <span className="font-mono text-xs text-[var(--color-status-online)] truncate">IMMEDIATE DEPLOYMENT</span>
+           <span className="font-mono text-xs text-[var(--color-status-online)] whitespace-normal md:truncate">IMMEDIATE DEPLOYMENT</span>
         </div>
       </div>
 

@@ -36,7 +36,16 @@
     color: var(--color-text-primary);
     font-family: var(--font-sans);
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto; /* Unlocks native mobile document scrolling */
+  }
+
+  /* Re-locks the window into a fixed kiosk terminal ONLY on desktop screens */
+  @media (min-width: 768px) {
+    body {
+      overflow: hidden;
+      height: 100vh;
+    }
   }
 }
 
@@ -69,6 +78,7 @@
     background-color: white !important;
     color: black !important;
     overflow: visible !important;
+    height: auto !important;
   }
   
   /* Reset backgrounds */
@@ -128,4 +138,3 @@
     overflow: visible !important;
   }
 }
-
