@@ -1,32 +1,43 @@
-# React + TypeScript + Vite
+# CLASSIFIED: OPERATIVE DOSSIER
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**CLEARANCE LEVEL:** FIELD OPERATIVE  
+**STATUS:** ACTIVE DEPLOYMENT  
 
-Currently, two official plugins are available:
+An immersive, tactical portfolio application engineered to simulate a high-clearance intelligence terminal. Built to showcase full-stack development capabilities, system architecture, and advanced UI/UX interactions without sacrificing accessibility.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## MISSION BRIEF
+This system replaces standard web portfolio aesthetics with a cinematic, terminal-driven experience. It features a custom hardware-handshake boot sequence, interactive 3D telemetry, and responsive tactical interfaces designed to present professional engineering metrics. 
 
-## React Compiler
+## TECHNICAL ARMORY (CORE STACK)
+*   **Framework:** React + TypeScript
+*   **Build System:** Vite (Optimized for lightning-fast HMR)
+*   **Styling:** Tailwind CSS (Custom tactical amber/monochrome themes)
+*   **Physics & Animation:** Framer Motion (Lens-blur reveals, hardware deployment logic)
+*   **Typography:** Google Fonts (Bebas Neue for headers, Orbitron for terminal jargon)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## DEPLOYMENT PROTOCOL
+To decrypt and initialize the dossier locally on your secure server:
 
-## Expanding the Oxlint configuration
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/barcode8/portfolio.git](https://github.com/barcode8/portfolio.git)
+    cd operative-dossier
+    ```
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+3.  **Initialize Local Dev Server:**
+    ```bash
+    npm run dev
+    ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+4.  **Access the Terminal:**
+    Open your browser and navigate to `http://localhost:5173` to initiate the boot sequence.
+
+##  SECURE DATA EXPORT
+The system includes a custom `@media print` architectural layer. For standard ATS (Applicant Tracking System) parsing, the UI forces an automated decryption and theme inversion upon triggering a print command (`Ctrl+P`). This strips the dark-mode aesthetic and outputs a perfectly formatted, plaintext A4 document.
+
+---
