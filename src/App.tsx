@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Shield, Lock, Unlock, Volume2, VolumeX, Printer } from 'lucide-react';
+import { Shield, Lock, Unlock, Volume2, VolumeX, Printer, ChevronDown } from 'lucide-react';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { ClassificationStamp } from './components/ui/ClassificationStamp';
 import { OperativeOverview } from './components/pages/OperativeOverview';
@@ -22,6 +22,8 @@ const DOSSIER_TABS = [
 function App() {
   const [activeTabId, setActiveTabId] = useState<number>(0);
   const [isClient, setIsClient] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [isBooted, setIsBooted] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return sessionStorage.getItem('dossier_booted') === 'true';
@@ -34,6 +36,21 @@ function App() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target as Node)) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside as EventListener);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside as EventListener);
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     if (isBooted && !isDecrypted) {
@@ -93,7 +110,59 @@ function App() {
           </span>
         </div>
 
-        <nav className="flex space-x-1 h-full overflow-x-auto whitespace-nowrap scroll-smooth flex-1 custom-scrollbar hide-scrollbar">
+        {/* ── MOBILE DOSSIER SELECTOR (below lg) ──────────────────── */}
+        <div ref={mobileMenuRef} className="flex lg:hidden items-center h-full flex-1 min-w-0 relative">
+          <button
+            onClick={() => { playDeploy(); setMobileMenuOpen(prev => !prev); }}
+            className="flex items-center justify-center gap-2 h-full px-4 flex-1 min-w-0 text-center bg-[var(--color-amber-dim)] text-[var(--color-amber)] border-b-2 border-[var(--color-amber)] transition-all duration-150 active:bg-[var(--color-amber-ghost)]"
+          >
+            <span className="font-mono text-[0.6rem] opacity-60">[{DOSSIER_TABS[activeTabId].code}]</span>
+            <span className="font-display text-base font-medium tracking-normal mt-0.5 truncate">
+              {DOSSIER_TABS[activeTabId].shortLabel}
+            </span>
+            <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${mobileMenuOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -8, scaleY: 0.95 }}
+                animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
+                style={{ transformOrigin: 'top' }}
+                className="absolute top-full left-0 right-0 z-50 border border-[var(--color-border-mid)] bg-[var(--color-panel-deep)] shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-sm"
+              >
+                {DOSSIER_TABS.map((tab) => {
+                  const isActive = activeTabId === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => { handleTabClick(tab.id); setMobileMenuOpen(false); }}
+                      className={`w-full flex items-center gap-3 px-4 py-3 font-mono text-sm tracking-wide transition-all duration-150 border-l-2 ${
+                        isActive
+                          ? 'bg-[var(--color-amber-dim)] text-[var(--color-amber)] border-l-[var(--color-amber)]'
+                          : 'text-[var(--color-text-secondary)] border-l-transparent hover:bg-[var(--color-amber-ghost)] hover:text-[var(--color-text-primary)]'
+                      }`}
+                    >
+                      <span className="opacity-50 text-[0.65rem] shrink-0">[{tab.code}]</span>
+                      <span className="font-display text-base font-medium tracking-normal mt-0.5">{tab.shortLabel}</span>
+                      {isActive && <span className="ml-auto text-[0.6rem] text-[var(--color-amber)] opacity-60">● ACTIVE</span>}
+                    </button>
+                  );
+                })}
+                <div className="border-t border-[var(--color-border-subtle)] px-4 py-2">
+                  <span className="font-mono text-[0.55rem] text-[var(--color-text-muted)] tracking-[0.2em]">
+                    DOSSIER NAV · {String(activeTabId + 1).padStart(2, '0')}/{String(DOSSIER_TABS.length).padStart(2, '0')}
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* ── DESKTOP TAB BAR (lg and up) ─────────────────────────── */}
+        <nav className="hidden lg:flex space-x-1 h-full flex-1">
           {DOSSIER_TABS.map((tab) => {
             const isActive = activeTabId === tab.id;
             return (
@@ -102,17 +171,14 @@ function App() {
                 onClick={() => handleTabClick(tab.id)}
                 onMouseEnter={playHover}
                 className={`
-                  relative h-full px-5 flex items-center group transition-all duration-150 min-w-[100px] sm:min-w-0 active:bg-[var(--color-amber-dim)]
+                  relative h-full px-5 flex items-center group transition-all duration-150 active:bg-[var(--color-amber-dim)]
                   ${isActive 
                     ? 'bg-[var(--color-amber-dim)] text-[var(--color-amber)] border-b-2 border-[var(--color-amber)] shadow-[inset_0_-2px_12px_rgba(255,176,0,0.15)]' 
                     : 'bg-[var(--color-panel)] text-[var(--color-text-primary)] opacity-60 hover:bg-[var(--color-amber-ghost)] hover:opacity-100'}
                 `}
               >
                 <span className="font-mono text-[0.65rem] opacity-60 mr-2">[{tab.code}]</span>
-                <span className="font-display text-lg font-medium tracking-normal mt-0.5">
-                  <span className="hidden lg:inline">{tab.label}</span>
-                  <span className="inline lg:hidden">{tab.shortLabel}</span>
-                </span>
+                <span className="font-display text-lg font-medium tracking-normal mt-0.5">{tab.label}</span>
               </button>
             );
           })}
