@@ -5,10 +5,12 @@ import { RedactionBlock } from '../ui/RedactionBlock';
 import { TerminalScramble } from '../ui/TerminalScramble';
 import { LiveTelemetry } from '../ui/LiveTelemetry';
 import { useDossier } from '../../contexts/DossierContext';
+import { useIsDesktop } from '../../hooks/useIsDesktop';
 
 export function ClassifiedOperations() {
   const featuredStack = ['React', 'Node.js', 'Express.js', 'MongoDB', 'Docker', 'Cloudinary'];
   const { isDecrypted } = useDossier();
+  const isDesktop = useIsDesktop();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -63,7 +65,7 @@ export function ClassifiedOperations() {
           >
             <motion.div 
               className="relative h-auto min-h-fit bg-[var(--color-panel-deep)] border border-[var(--color-amber)] p-8 pb-16"
-              style={window.innerWidth > 768 ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
+              style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
             >
               <BracketCorners size={12} thickness={2} color="var(--color-amber)" />
               
@@ -83,7 +85,7 @@ export function ClassifiedOperations() {
                   <div className="absolute inset-0 bg-gradient-to-br from-[#152030] to-transparent opacity-30 pointer-events-none" />
                   <TerminalScramble 
                     text="VIDSHARE"
-                    className="font-display text-4xl sm:text-6xl md:text-9xl tracking-tight text-[var(--color-text-primary)] shadow-[var(--color-amber-glow)] relative z-10"
+                    className="font-display text-4xl sm:text-6xl md:text-9xl tracking-tight text-[var(--color-text-primary)] relative z-10"
                     style={{ textShadow: '0 0 40px rgba(255,176,0,0.12)' }}
                   />
                 </div>
@@ -187,7 +189,7 @@ export function ClassifiedOperations() {
                    <span className="animate-pulse ml-2 font-bold">_</span>
                  </div>
                  <div 
-                   className="font-display text-4xl sm:text-5xl xl:text-6xl tracking-tight text-[var(--color-text-primary)] shadow-[var(--color-amber-glow)]"
+                   className="font-display text-4xl sm:text-5xl xl:text-6xl tracking-tight text-[var(--color-text-primary)]"
                    style={{ textShadow: '0 0 40px rgba(255,176,0,0.15)' }}
                  >
                    COMING SOON

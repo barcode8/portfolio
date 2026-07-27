@@ -114,7 +114,7 @@ function App() {
         <div ref={mobileMenuRef} className="flex lg:hidden items-center h-full flex-1 min-w-0 relative">
           <button
             onClick={() => { playDeploy(); setMobileMenuOpen(prev => !prev); }}
-            className="flex items-center justify-center gap-2 h-full px-4 flex-1 min-w-0 text-center bg-[var(--color-amber-dim)] text-[var(--color-amber)] border-b-2 border-[var(--color-amber)] transition-all duration-150 active:bg-[var(--color-amber-ghost)]"
+            className="flex justify-center items-center text-center gap-2 h-full px-3 flex-1 min-w-0 bg-[var(--color-amber-dim)] text-[var(--color-amber)] border-b-2 border-[var(--color-amber)] transition-all duration-150 active:bg-[var(--color-amber-ghost)]"
           >
             <span className="font-mono text-[0.6rem] opacity-60">[{DOSSIER_TABS[activeTabId].code}]</span>
             <span className="font-display text-base font-medium tracking-normal mt-0.5 truncate">

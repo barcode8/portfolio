@@ -6,12 +6,14 @@ import { RedactionBlock } from '../ui/RedactionBlock';
 import { TerminalScramble } from '../ui/TerminalScramble';
 import { useDossier } from '../../contexts/DossierContext';
 import { useAudioHooks } from '../../hooks/useAudioHooks';
+import { useIsDesktop } from '../../hooks/useIsDesktop';
 
 export function OperativeOverview() {
   const skills = ['JavaScript', 'Python', 'C', 'C++', 'Node.js', 'Express.js', 'MongoDB', 'React', 'Tailwind CSS', 'Docker', 'Linux', 'Nginx', 'Git'];
   const { isDecrypted } = useDossier();
   const { playHover, playDeploy } = useAudioHooks();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isDesktop = useIsDesktop();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -40,10 +42,7 @@ export function OperativeOverview() {
   };
 
   return (
-    <motion.div 
-      initial={{ scale: 0.98, opacity: 0, filter: 'blur(4px)' }}
-      animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+    <div 
       className="flex flex-col h-auto md:h-full space-y-4 relative z-10"
     >
       {/* Header */}
@@ -62,7 +61,7 @@ export function OperativeOverview() {
         >
           <motion.div 
             className="w-full h-full bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)] p-6 flex flex-col relative"
-            style={window.innerWidth > 768 ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
+            style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
           >
             <BracketCorners size={12} thickness={2} color="var(--color-amber)" />
             
@@ -241,15 +240,15 @@ export function OperativeOverview() {
 
       {/* PANEL D: DEPLOYMENT STATUS STRIP */}
       <div className="w-full h-auto flex flex-col md:flex-row items-start md:items-center py-4 md:py-0 shrink-0 gap-4 md:gap-0 bg-[var(--color-panel-deep)] border border-[var(--color-border-mid)]">
-        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-r border-[var(--color-border-subtle)] min-w-0">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-b md:border-b-0 md:border-r border-[var(--color-border-subtle)] min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">SPECIALISATION:</span>
            <span className="font-mono text-xs text-[var(--color-text-primary)] whitespace-normal md:truncate">Backend/DevOps Development</span>
         </div>
-        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-r border-[var(--color-border-subtle)] min-w-0">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-b md:border-b-0 md:border-r border-[var(--color-border-subtle)] min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">PRIMARY STACK:</span>
            <span className="font-mono text-xs text-[var(--color-text-primary)] whitespace-normal md:truncate">React · Node.js · Express.js · MongoDB · Docker</span>
         </div>
-        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-r border-[var(--color-border-subtle)] hidden xl:flex min-w-0">
+        <div className="flex-1 flex items-center flex-wrap md:flex-nowrap h-full px-4 border-b md:border-b-0 md:border-r border-[var(--color-border-subtle)] hidden xl:flex min-w-0">
            <span className="font-mono text-[0.65rem] text-[var(--color-text-muted)] tracking-widest mr-3 shrink-0">ENVIRONMENT:</span>
            <span className="font-mono text-xs text-[var(--color-text-primary)] whitespace-normal md:truncate">Arch Linux / Hyprland WM</span>
         </div>
@@ -330,6 +329,6 @@ export function OperativeOverview() {
         )}
       </AnimatePresence>
 
-    </motion.div>
+    </div>
   );
 }

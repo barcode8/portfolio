@@ -6,6 +6,10 @@ export function CustomCursor() {
   const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
+    // Don't hijack cursor on touch devices
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       

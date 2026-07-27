@@ -97,7 +97,7 @@ export function TechnicalArmory() {
               </div>
               <div 
                 className="font-mono text-[0.65rem] tracking-[0.15em] px-2 py-0.5 border"
-                style={{ borderColor: mod.color, color: mod.color, backgroundColor: `${mod.color}10` }}
+                style={{ borderColor: mod.color, color: mod.color, backgroundColor: 'color-mix(in srgb, currentColor 6%, transparent)' }}
               >
                 {mod.clearance}
               </div>

@@ -163,7 +163,7 @@ export function AcademicDirectives() {
               {MODULES.map((mod, idx) => (
                 <motion.div key={idx} variants={itemVariants} className="flex pl-4 border-l border-[var(--color-border-subtle)] hover:border-[var(--color-amber)] transition-colors duration-200">
                   <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center justify-between mb-2 flex-wrap gap-1">
                       <div className="flex items-center">
                         <div className="w-[4px] h-[4px] mr-3 rounded-full" style={{ backgroundColor: mod.statusColor }} />
                         <span className="font-mono text-xs text-[var(--color-text-muted)] mr-3 tracking-widest">{mod.code}</span>
